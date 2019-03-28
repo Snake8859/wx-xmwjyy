@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmwjyy.wxx.mapper.TbAuthenticationPictureMapper" >
+  <resultMap id="BaseResultMap" type="com.xmwjyy.wxx.pojo.TbAuthenticationPicture" >
+    <id column="apId" property="apid" jdbcType="VARCHAR" />
+    <result column="picName" property="picname" jdbcType="VARCHAR" />
+    <result column="uaId" property="uaid" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    apId, picName, uaId, createTime, updateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_authentication_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_authentication_picture
+    where apId = #{apid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_authentication_picture
+    where apId = #{apid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPictureExample" >
+    delete from tb_authentication_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPicture" >
+    insert into tb_authentication_picture (apId, picName, uaId, 
+      createTime, updateTime)
+    values (#{apid,jdbcType=VARCHAR}, #{picname,jdbcType=VARCHAR}, #{uaid,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPicture" >
+    insert into tb_authentication_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="apid != null" >
+        apId,
+      </if>
+      <if test="picname != null" >
+        picName,
+      </if>
+      <if test="uaid != null" >
+        uaId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="apid != null" >
+        #{apid,jdbcType=VARCHAR},
+      </if>
+      <if test="picname != null" >
+        #{picname,jdbcType=VARCHAR},
+      </if>
+      <if test="uaid != null" >
+        #{uaid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPictureExample" resultType="java.lang.Integer" >
+    select count(*) from tb_authentication_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_authentication_picture
+    <set >
+      <if test="record.apid != null" >
+        apId = #{record.apid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picname != null" >
+        picName = #{record.picname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uaid != null" >
+        uaId = #{record.uaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_authentication_picture
+    set apId = #{record.apid,jdbcType=VARCHAR},
+      picName = #{record.picname,jdbcType=VARCHAR},
+      uaId = #{record.uaid,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPicture" >
+    update tb_authentication_picture
+    <set >
+      <if test="picname != null" >
+        picName = #{picname,jdbcType=VARCHAR},
+      </if>
+      <if test="uaid != null" >
+        uaId = #{uaid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apId = #{apid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmwjyy.wxx.pojo.TbAuthenticationPicture" >
+    update tb_authentication_picture
+    set picName = #{picname,jdbcType=VARCHAR},
+      uaId = #{uaid,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where apId = #{apid,jdbcType=VARCHAR}
+  </update>
+</mapper>

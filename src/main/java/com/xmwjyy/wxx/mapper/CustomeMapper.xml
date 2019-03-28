@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmwjyy.wxx.mapper.CustomeMapper">
+
+	<!-- 根据openid查询用户鉴定项基本内容 -->
+	<select id="selectAuthItem" resultType="com.xmwjyy.wxx.pojo.CustomAuthOrAuditItem" parameterType="String">
+		SELECT
+			t1.uaid,
+			t1.taid,
+			t1.content,
+			t1.replystate,
+			t1.auditstate,
+			t1.isread,
+			t1.createtime,
+			t2.taname
+		FROM
+			tb_user_authentication t1
+		JOIN tb_type_authentication t2 ON t1.taid = t2.taid
+		WHERE
+			t1.openid = #{openid}
+	</select>
+
+	<!-- 查询审核项基本内容 -->
+	<select id="selectAuditItem" resultType="com.xmwjyy.wxx.pojo.CustomAuthOrAuditItem">
+		SELECT
+			t1.uaid,
+			t1.taid,
+			t1.content,
+			t1.replystate,
+			t1.auditstate,
+			t1.createtime,
+			t2.taname
+		FROM
+			tb_user_authentication t1
+			JOIN tb_type_authentication t2 ON t1.taid = t2.taid
+	</select>
+	
+	<resultMap type="com.xmwjyy.wxx.pojo.CustomAuthOrAuditInfo" id="authOrAuditInfoMap">
+		<id property="uaid" column="uaid" />
+		<result property="taid" column="taid" />
+		<result property="taname" column="taname" />
+		<result property="content" column="content" />
+		<result property="expertreply" column="expertreply" />
+		<result property="auditstate" column="auditstate" />
+		<result property="createtime" column="createtime" />
+		<result property="updatetime" column="updatetime" />
+		<!-- 配置一对多关系 -->
+		<collection property="picList" javaType="list" ofType="com.xmwjyy.wxx.pojo.TbAuthenticationPicture">
+			<id property="apid" column="apid"/>
+			<result property="picname" column="picname"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 查询鉴定项或审核项完整内容 -->
+	<select id="selectAuthOrAuditInfo" resultMap="authOrAuditInfoMap" parameterType="String">
+		SELECT
+			t1.uaid,
+			t1.taid,
+			t3.taname,
+			t1.expertreply,
+			t1.content,
+			t1.auditstate,
+			t1.createtime,
+			t1.updatetime,
+			t2.apid,
+			t2.picname
+		FROM
+		tb_user_authentication t1
+			LEFT JOIN tb_authentication_picture t2 ON t1.uaid = t2.uaid
+			LEFT JOIN tb_type_authentication t3 on t1.taid = t3.taid
+		WHERE
+		t1.uaid = #{uaid}
+	</select>
+	
+	
+</mapper>

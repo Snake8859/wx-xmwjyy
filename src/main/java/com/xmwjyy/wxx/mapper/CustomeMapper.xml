@@ -72,5 +72,45 @@
 		t1.uaid = #{uaid}
 	</select>
 	
+	<!-- 查询仪器列表 -->
+	<select id="selectInstrumentList" resultType="com.xmwjyy.wxx.pojo.CustomInstrument">
+		SELECT
+			t1.iname,
+			t1.sncode,
+			t1.organization,
+			count(*) AS count
+		FROM
+			tb_instrument t1
+		LEFT JOIN tb_instrument_user t2 ON t1.sncode = t2.sncode
+		GROUP BY
+			t1.sncode
+	</select>
+	
+	<!-- 根据sncode查询仪器绑定的用户 -->
+	<select id="selectInstrumentBindUserListBySncode" resultType="com.xmwjyy.wxx.pojo.TbUser" parameterType="String">
+		SELECT
+			t2.openid,
+			t2.nickname,
+			t2.userpic
+		FROM
+			tb_instrument_user t1
+		LEFT JOIN tb_user t2 ON t1.openid = t2.openid
+		WHERE
+			sncode = #{sncode}
+	</select>
+	
+	<select id="selectInstrumentListByOpenid" resultType="com.xmwjyy.wxx.pojo.TbInstrument" parameterType="String">
+		SELECT
+			t2.iid,
+			t2.iname,
+			t2.sncode,
+			t2.organization
+		FROM
+			tb_instrument_user t1
+		LEFT JOIN tb_instrument t2 ON t1.sncode = t2.sncode
+		WHERE
+			t1.openid = #{openid}
+	</select>
+	
 	
 </mapper>

@@ -1,26 +1,21 @@
 package com.xmwjyy.wxx.controller;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.xmwjyy.wxx.common.utils.WxResult;
+import com.xmwjyy.wxx.pojo.TbUser;
+import com.xmwjyy.wxx.pojo.TbUserAuthentication;
+import com.xmwjyy.wxx.service.CommonService;
+import com.xmwjyy.wxx.service.UserService;
+
 /**
  * 用户管理Controller
  * @author Snake8859
  *
  */
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.xmwjyy.wxx.common.utils.WxResult;
-import com.xmwjyy.wxx.pojo.TbAuthenticationPicture;
-import com.xmwjyy.wxx.pojo.TbUser;
-import com.xmwjyy.wxx.pojo.TbUserAuthentication;
-import com.xmwjyy.wxx.service.CommonService;
-import com.xmwjyy.wxx.service.UserService;
 @Controller
 public class UserController {
 

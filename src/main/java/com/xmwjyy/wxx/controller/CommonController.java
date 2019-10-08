@@ -2,18 +2,14 @@ package com.xmwjyy.wxx.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.xmwjyy.wxx.common.utils.UuidUtil;
 import com.xmwjyy.wxx.common.utils.WxResult;
 
@@ -31,6 +27,7 @@ public class CommonController {
 	
 	@Value("${REALPATH}")
 	private String REALPATH;
+	
 	
 	/**
 	 * 图片上传

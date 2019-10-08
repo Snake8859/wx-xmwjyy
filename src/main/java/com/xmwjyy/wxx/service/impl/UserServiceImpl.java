@@ -68,10 +68,15 @@ public class UserServiceImpl implements UserService {
 		
 		if(flag){
 			//根据openid更新用户信息
-			tbUser.setUpdatetime(new Date());
-			int i = tbUserMapper.updateByPrimaryKeySelective(tbUser);
-			if(i>0){
-				return WxResult.build(200, "更新成功");
+			try {
+				tbUser.setUpdatetime(new Date());
+				int i = tbUserMapper.updateByPrimaryKeySelective(tbUser);
+				if(i>0){
+					return WxResult.build(200, "更新成功");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return WxResult.build(404, "更新失败");
 			}
 			return WxResult.build(404, "更新失败");
 		}else{
@@ -99,9 +104,14 @@ public class UserServiceImpl implements UserService {
 		//设置创建时间和修改时间
 		tbUserCollection.setCreatetime(new Date());
 		tbUserCollection.setUpdatetime(new Date());
-		int i = tbUserCollectionMapper.insertSelective(tbUserCollection);
-		if(i>0){
-			return WxResult.build(200, "收藏成功");
+		try {
+			int i = tbUserCollectionMapper.insertSelective(tbUserCollection);
+			if(i>0){
+				return WxResult.build(200, "收藏成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "收藏失败 -- 插入数据过程失败");
 		}
 		return WxResult.build(404, "收藏失败 -- 插入数据过程失败");
 	}
@@ -142,9 +152,14 @@ public class UserServiceImpl implements UserService {
 		tbUserAuthentication.setIsread("0");
 		tbUserAuthentication.setCreatetime(new Date());
 		tbUserAuthentication.setUpdatetime(new Date());
-		int i = tbUserAuthenticationMapper.insert(tbUserAuthentication);
-		if(i>0){
-			return WxResult.build(200, "鉴定项保存成功",tbUserAuthentication.getUaid());
+		try {
+			int i = tbUserAuthenticationMapper.insert(tbUserAuthentication);
+			if(i>0){
+				return WxResult.build(200, "鉴定项保存成功",tbUserAuthentication.getUaid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "鉴定项保存失败 -- 鉴定项插入数据时失败");
 		}
 		return WxResult.build(404, "鉴定项保存失败 -- 鉴定项插入数据时失败");
 	}

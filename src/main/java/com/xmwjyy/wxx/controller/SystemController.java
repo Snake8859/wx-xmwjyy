@@ -2,11 +2,9 @@ package com.xmwjyy.wxx.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.xmwjyy.wxx.common.utils.WxResult;
 import com.xmwjyy.wxx.pojo.TbTechnicalCase;
 import com.xmwjyy.wxx.pojo.TbUserAuthentication;
@@ -65,6 +63,12 @@ public class SystemController {
 		return wxResult;
 	}
 	
+	/**
+	 * 管理员修改回复
+	 * @param uaid
+	 * @param expertreply
+	 * @return
+	 */
 	@RequestMapping(value="/system/changeReply",method= RequestMethod.POST)
 	@ResponseBody
 	public WxResult changeReply(String uaid,String expertreply){

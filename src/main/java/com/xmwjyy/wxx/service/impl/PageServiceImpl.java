@@ -70,9 +70,17 @@ public class PageServiceImpl implements PageService {
 		tbUser.setIsadministrator("1");
 		tbUser.setCreatetime(new Date());
 		tbUser.setUpdatetime(new Date());
-		int i = tbUserMapper.insert(tbUser);
-		if(i>0){
-			return WxResult.build(200, "初始化登录成功",customResult);
+		try {
+			int i = tbUserMapper.insert(tbUser);
+			//测试事务
+			//int j = 1/0;
+			if(i>0){
+				return WxResult.build(200, "初始化登录成功",customResult);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "登录失败");
+			// TODO: handle exception
 		}
 		return WxResult.build(404, "登录失败");
 	}
@@ -147,10 +155,16 @@ public class PageServiceImpl implements PageService {
 			return WxResult.build(200, "修改成功 -- 已阅读状态，无需修改");
 		}
 		tbUserAuthentication.setIsread("1");
-		int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
-		if(i>0){
-			return WxResult.build(200, "修改成功");
+		try {
+			int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
+			if(i>0){
+				return WxResult.build(200, "修改成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(200, "修改失败 -- 数据库修改时失败");
 		}
+		
 		return WxResult.build(200, "修改失败 -- 数据库修改时失败");
 	}
 

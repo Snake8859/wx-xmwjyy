@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmwjyy.wxx.mapper.TbInstrumentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xmwjyy.wxx.pojo.TbInstrumentInfo" >
+    <id column="iid" property="iid" jdbcType="VARCHAR" />
+    <result column="ItemID" property="ItemID" jdbcType="INTEGER" />
+    <result column="BatchID" property="BatchID" jdbcType="INTEGER" />
+    <result column="sampleID" property="sampleID" jdbcType="VARCHAR" />
+    <result column="ItemName" property="ItemName" jdbcType="VARCHAR" />
+    <result column="BatchName" property="BatchName" jdbcType="VARCHAR" />
+    <result column="TestTime" property="TestTime" jdbcType="VARCHAR" />
+    <result column="CValue" property="CValue" jdbcType="INTEGER" />
+    <result column="T1Value" property="T1Value" jdbcType="INTEGER" />
+    <result column="T2Value" property="T2Value" jdbcType="INTEGER" />
+    <result column="T3Value" property="T3Value" jdbcType="INTEGER" />
+    <result column="Concentration" property="Concentration" jdbcType="VARCHAR" />
+    <result column="Unit" property="Unit" jdbcType="VARCHAR" />
+    <result column="CRange" property="CRange" jdbcType="VARCHAR" />
+    <result column="Judge" property="Judge" jdbcType="VARCHAR" />
+    <result column="sncode" property="sncode" jdbcType="VARCHAR" />
+    <result column="humidity" property="humidity" jdbcType="VARCHAR" />
+    <result column="landform" property="landform" jdbcType="VARCHAR" />
+    <result column="operator_worker" property="operator_worker" jdbcType="VARCHAR" />
+    <result column="sample_addr" property="sample_addr" jdbcType="VARCHAR" />
+    <result column="sample_time" property="sample_time" jdbcType="VARCHAR" />
+    <result column="sample_type" property="sample_type" jdbcType="VARCHAR" />
+    <result column="sample_worker" property="sample_worker" jdbcType="VARCHAR" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="weather" property="weather" jdbcType="VARCHAR" />
+    <result column="windDirection" property="windDirection" jdbcType="VARCHAR" />
+    <result column="windSpeed" property="windSpeed" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    iid, ItemID, BatchID, sampleID, ItemName, BatchName, TestTime, CValue, T1Value, T2Value, 
+    T3Value, Concentration, Unit, CRange, Judge, sncode, humidity, landform, operator_worker, 
+    sample_addr, sample_time, sample_type, sample_worker, temperature, weather, windDirection, 
+    windSpeed
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_instrument_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_instrument_info
+    where iid = #{iid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_instrument_info
+    where iid = #{iid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfoExample" >
+    delete from tb_instrument_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfo" >
+    insert into tb_instrument_info (iid, ItemID, BatchID, 
+      sampleID, ItemName, BatchName, 
+      TestTime, CValue, T1Value, 
+      T2Value, T3Value, Concentration, 
+      Unit, CRange, Judge, 
+      sncode, humidity, landform, 
+      operator_worker, sample_addr, sample_time, 
+      sample_type, sample_worker, temperature, 
+      weather, windDirection, windSpeed
+      )
+    values (#{iid,jdbcType=VARCHAR}, #{ItemID,jdbcType=INTEGER}, #{BatchID,jdbcType=INTEGER}, 
+      #{sampleID,jdbcType=VARCHAR}, #{ItemName,jdbcType=VARCHAR}, #{BatchName,jdbcType=VARCHAR}, 
+      #{TestTime,jdbcType=VARCHAR}, #{CValue,jdbcType=INTEGER}, #{T1Value,jdbcType=INTEGER}, 
+      #{T2Value,jdbcType=INTEGER}, #{T3Value,jdbcType=INTEGER}, #{Concentration,jdbcType=VARCHAR}, 
+      #{Unit,jdbcType=VARCHAR}, #{CRange,jdbcType=VARCHAR}, #{Judge,jdbcType=VARCHAR}, 
+      #{sncode,jdbcType=VARCHAR}, #{humidity,jdbcType=VARCHAR}, #{landform,jdbcType=VARCHAR}, 
+      #{operator_worker,jdbcType=VARCHAR}, #{sample_addr,jdbcType=VARCHAR}, #{sample_time,jdbcType=VARCHAR}, 
+      #{sample_type,jdbcType=VARCHAR}, #{sample_worker,jdbcType=VARCHAR}, #{temperature,jdbcType=VARCHAR}, 
+      #{weather,jdbcType=VARCHAR}, #{windDirection,jdbcType=VARCHAR}, #{windSpeed,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfo" >
+    insert into tb_instrument_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="ItemID != null" >
+        ItemID,
+      </if>
+      <if test="BatchID != null" >
+        BatchID,
+      </if>
+      <if test="sampleID != null" >
+        sampleID,
+      </if>
+      <if test="ItemName != null" >
+        ItemName,
+      </if>
+      <if test="BatchName != null" >
+        BatchName,
+      </if>
+      <if test="TestTime != null" >
+        TestTime,
+      </if>
+      <if test="CValue != null" >
+        CValue,
+      </if>
+      <if test="T1Value != null" >
+        T1Value,
+      </if>
+      <if test="T2Value != null" >
+        T2Value,
+      </if>
+      <if test="T3Value != null" >
+        T3Value,
+      </if>
+      <if test="Concentration != null" >
+        Concentration,
+      </if>
+      <if test="Unit != null" >
+        Unit,
+      </if>
+      <if test="CRange != null" >
+        CRange,
+      </if>
+      <if test="Judge != null" >
+        Judge,
+      </if>
+      <if test="sncode != null" >
+        sncode,
+      </if>
+      <if test="humidity != null" >
+        humidity,
+      </if>
+      <if test="landform != null" >
+        landform,
+      </if>
+      <if test="operator_worker != null" >
+        operator_worker,
+      </if>
+      <if test="sample_addr != null" >
+        sample_addr,
+      </if>
+      <if test="sample_time != null" >
+        sample_time,
+      </if>
+      <if test="sample_type != null" >
+        sample_type,
+      </if>
+      <if test="sample_worker != null" >
+        sample_worker,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="weather != null" >
+        weather,
+      </if>
+      <if test="windDirection != null" >
+        windDirection,
+      </if>
+      <if test="windSpeed != null" >
+        windSpeed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=VARCHAR},
+      </if>
+      <if test="ItemID != null" >
+        #{ItemID,jdbcType=INTEGER},
+      </if>
+      <if test="BatchID != null" >
+        #{BatchID,jdbcType=INTEGER},
+      </if>
+      <if test="sampleID != null" >
+        #{sampleID,jdbcType=VARCHAR},
+      </if>
+      <if test="ItemName != null" >
+        #{ItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="BatchName != null" >
+        #{BatchName,jdbcType=VARCHAR},
+      </if>
+      <if test="TestTime != null" >
+        #{TestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="CValue != null" >
+        #{CValue,jdbcType=INTEGER},
+      </if>
+      <if test="T1Value != null" >
+        #{T1Value,jdbcType=INTEGER},
+      </if>
+      <if test="T2Value != null" >
+        #{T2Value,jdbcType=INTEGER},
+      </if>
+      <if test="T3Value != null" >
+        #{T3Value,jdbcType=INTEGER},
+      </if>
+      <if test="Concentration != null" >
+        #{Concentration,jdbcType=VARCHAR},
+      </if>
+      <if test="Unit != null" >
+        #{Unit,jdbcType=VARCHAR},
+      </if>
+      <if test="CRange != null" >
+        #{CRange,jdbcType=VARCHAR},
+      </if>
+      <if test="Judge != null" >
+        #{Judge,jdbcType=VARCHAR},
+      </if>
+      <if test="sncode != null" >
+        #{sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="humidity != null" >
+        #{humidity,jdbcType=VARCHAR},
+      </if>
+      <if test="landform != null" >
+        #{landform,jdbcType=VARCHAR},
+      </if>
+      <if test="operator_worker != null" >
+        #{operator_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_addr != null" >
+        #{sample_addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_time != null" >
+        #{sample_time,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_type != null" >
+        #{sample_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_worker != null" >
+        #{sample_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null" >
+        #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirection != null" >
+        #{windDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeed != null" >
+        #{windSpeed,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tb_instrument_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_instrument_info
+    <set >
+      <if test="record.iid != null" >
+        iid = #{record.iid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ItemID != null" >
+        ItemID = #{record.ItemID,jdbcType=INTEGER},
+      </if>
+      <if test="record.BatchID != null" >
+        BatchID = #{record.BatchID,jdbcType=INTEGER},
+      </if>
+      <if test="record.sampleID != null" >
+        sampleID = #{record.sampleID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ItemName != null" >
+        ItemName = #{record.ItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.BatchName != null" >
+        BatchName = #{record.BatchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.TestTime != null" >
+        TestTime = #{record.TestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CValue != null" >
+        CValue = #{record.CValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.T1Value != null" >
+        T1Value = #{record.T1Value,jdbcType=INTEGER},
+      </if>
+      <if test="record.T2Value != null" >
+        T2Value = #{record.T2Value,jdbcType=INTEGER},
+      </if>
+      <if test="record.T3Value != null" >
+        T3Value = #{record.T3Value,jdbcType=INTEGER},
+      </if>
+      <if test="record.Concentration != null" >
+        Concentration = #{record.Concentration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.Unit != null" >
+        Unit = #{record.Unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CRange != null" >
+        CRange = #{record.CRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.Judge != null" >
+        Judge = #{record.Judge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sncode != null" >
+        sncode = #{record.sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.humidity != null" >
+        humidity = #{record.humidity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landform != null" >
+        landform = #{record.landform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator_worker != null" >
+        operator_worker = #{record.operator_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample_addr != null" >
+        sample_addr = #{record.sample_addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample_time != null" >
+        sample_time = #{record.sample_time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample_type != null" >
+        sample_type = #{record.sample_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample_worker != null" >
+        sample_worker = #{record.sample_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperature != null" >
+        temperature = #{record.temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weather != null" >
+        weather = #{record.weather,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windDirection != null" >
+        windDirection = #{record.windDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windSpeed != null" >
+        windSpeed = #{record.windSpeed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_instrument_info
+    set iid = #{record.iid,jdbcType=VARCHAR},
+      ItemID = #{record.ItemID,jdbcType=INTEGER},
+      BatchID = #{record.BatchID,jdbcType=INTEGER},
+      sampleID = #{record.sampleID,jdbcType=VARCHAR},
+      ItemName = #{record.ItemName,jdbcType=VARCHAR},
+      BatchName = #{record.BatchName,jdbcType=VARCHAR},
+      TestTime = #{record.TestTime,jdbcType=VARCHAR},
+      CValue = #{record.CValue,jdbcType=INTEGER},
+      T1Value = #{record.T1Value,jdbcType=INTEGER},
+      T2Value = #{record.T2Value,jdbcType=INTEGER},
+      T3Value = #{record.T3Value,jdbcType=INTEGER},
+      Concentration = #{record.Concentration,jdbcType=VARCHAR},
+      Unit = #{record.Unit,jdbcType=VARCHAR},
+      CRange = #{record.CRange,jdbcType=VARCHAR},
+      Judge = #{record.Judge,jdbcType=VARCHAR},
+      sncode = #{record.sncode,jdbcType=VARCHAR},
+      humidity = #{record.humidity,jdbcType=VARCHAR},
+      landform = #{record.landform,jdbcType=VARCHAR},
+      operator_worker = #{record.operator_worker,jdbcType=VARCHAR},
+      sample_addr = #{record.sample_addr,jdbcType=VARCHAR},
+      sample_time = #{record.sample_time,jdbcType=VARCHAR},
+      sample_type = #{record.sample_type,jdbcType=VARCHAR},
+      sample_worker = #{record.sample_worker,jdbcType=VARCHAR},
+      temperature = #{record.temperature,jdbcType=VARCHAR},
+      weather = #{record.weather,jdbcType=VARCHAR},
+      windDirection = #{record.windDirection,jdbcType=VARCHAR},
+      windSpeed = #{record.windSpeed,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfo" >
+    update tb_instrument_info
+    <set >
+      <if test="ItemID != null" >
+        ItemID = #{ItemID,jdbcType=INTEGER},
+      </if>
+      <if test="BatchID != null" >
+        BatchID = #{BatchID,jdbcType=INTEGER},
+      </if>
+      <if test="sampleID != null" >
+        sampleID = #{sampleID,jdbcType=VARCHAR},
+      </if>
+      <if test="ItemName != null" >
+        ItemName = #{ItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="BatchName != null" >
+        BatchName = #{BatchName,jdbcType=VARCHAR},
+      </if>
+      <if test="TestTime != null" >
+        TestTime = #{TestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="CValue != null" >
+        CValue = #{CValue,jdbcType=INTEGER},
+      </if>
+      <if test="T1Value != null" >
+        T1Value = #{T1Value,jdbcType=INTEGER},
+      </if>
+      <if test="T2Value != null" >
+        T2Value = #{T2Value,jdbcType=INTEGER},
+      </if>
+      <if test="T3Value != null" >
+        T3Value = #{T3Value,jdbcType=INTEGER},
+      </if>
+      <if test="Concentration != null" >
+        Concentration = #{Concentration,jdbcType=VARCHAR},
+      </if>
+      <if test="Unit != null" >
+        Unit = #{Unit,jdbcType=VARCHAR},
+      </if>
+      <if test="CRange != null" >
+        CRange = #{CRange,jdbcType=VARCHAR},
+      </if>
+      <if test="Judge != null" >
+        Judge = #{Judge,jdbcType=VARCHAR},
+      </if>
+      <if test="sncode != null" >
+        sncode = #{sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="humidity != null" >
+        humidity = #{humidity,jdbcType=VARCHAR},
+      </if>
+      <if test="landform != null" >
+        landform = #{landform,jdbcType=VARCHAR},
+      </if>
+      <if test="operator_worker != null" >
+        operator_worker = #{operator_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_addr != null" >
+        sample_addr = #{sample_addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_time != null" >
+        sample_time = #{sample_time,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_type != null" >
+        sample_type = #{sample_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sample_worker != null" >
+        sample_worker = #{sample_worker,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null" >
+        weather = #{weather,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirection != null" >
+        windDirection = #{windDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeed != null" >
+        windSpeed = #{windSpeed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentInfo" >
+    update tb_instrument_info
+    set ItemID = #{ItemID,jdbcType=INTEGER},
+      BatchID = #{BatchID,jdbcType=INTEGER},
+      sampleID = #{sampleID,jdbcType=VARCHAR},
+      ItemName = #{ItemName,jdbcType=VARCHAR},
+      BatchName = #{BatchName,jdbcType=VARCHAR},
+      TestTime = #{TestTime,jdbcType=VARCHAR},
+      CValue = #{CValue,jdbcType=INTEGER},
+      T1Value = #{T1Value,jdbcType=INTEGER},
+      T2Value = #{T2Value,jdbcType=INTEGER},
+      T3Value = #{T3Value,jdbcType=INTEGER},
+      Concentration = #{Concentration,jdbcType=VARCHAR},
+      Unit = #{Unit,jdbcType=VARCHAR},
+      CRange = #{CRange,jdbcType=VARCHAR},
+      Judge = #{Judge,jdbcType=VARCHAR},
+      sncode = #{sncode,jdbcType=VARCHAR},
+      humidity = #{humidity,jdbcType=VARCHAR},
+      landform = #{landform,jdbcType=VARCHAR},
+      operator_worker = #{operator_worker,jdbcType=VARCHAR},
+      sample_addr = #{sample_addr,jdbcType=VARCHAR},
+      sample_time = #{sample_time,jdbcType=VARCHAR},
+      sample_type = #{sample_type,jdbcType=VARCHAR},
+      sample_worker = #{sample_worker,jdbcType=VARCHAR},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR},
+      windDirection = #{windDirection,jdbcType=VARCHAR},
+      windSpeed = #{windSpeed,jdbcType=VARCHAR}
+    where iid = #{iid,jdbcType=VARCHAR}
+  </update>
+</mapper>

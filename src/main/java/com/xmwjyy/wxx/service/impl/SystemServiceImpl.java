@@ -46,9 +46,14 @@ public class SystemServiceImpl implements SystemService {
 		}
 		//修改审核状态
 		tbUserAuthentication.setAuditstate("1");
-		int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
-		if(i>0){
-			return WxResult.build(200, "审核成功");
+		try {
+			int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
+			if(i>0){
+				return WxResult.build(200, "审核成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "审核失败 -- 审核修改状态失败");
 		}
 		return WxResult.build(404, "审核失败 -- 审核修改状态失败");
 	}
@@ -63,9 +68,14 @@ public class SystemServiceImpl implements SystemService {
 		tbTechnicalCase.setRecommend("0");
 		tbTechnicalCase.setCreatetime(new Date());
 		tbTechnicalCase.setUpdatetime(new Date());
-		int i = tbTechnicalCaseMapper.insert(tbTechnicalCase);
-		if(i>0){
-			return WxResult.build(200, "保存成功");
+		try {
+			int i = tbTechnicalCaseMapper.insert(tbTechnicalCase);
+			if(i>0){
+				return WxResult.build(200, "保存成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "保存失败 -- 插入数据时失败");
 		}
 		return WxResult.build(404, "保存失败 -- 插入数据时失败");
 	}
@@ -83,9 +93,14 @@ public class SystemServiceImpl implements SystemService {
 		tbUserAuthentication.setExpertreply(expertreply);
 		tbUserAuthentication.setUpdatetime(new Date());
 		//更新
-		int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
-		if(i>0){
-			return WxResult.build(200, "修改成功");
+		try {
+			int i = tbUserAuthenticationMapper.updateByPrimaryKeySelective(tbUserAuthentication);
+			if(i>0){
+				return WxResult.build(200, "修改成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return WxResult.build(404, "修改失败 -- 更新数据时失败");
 		}
 		return WxResult.build(404, "修改失败 -- 更新数据时失败");
 	}

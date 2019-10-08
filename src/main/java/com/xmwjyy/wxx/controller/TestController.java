@@ -20,7 +20,10 @@ import com.xmwjyy.wxx.pojo.TbTechnicalCaseExample;
  */
 @Controller
 public class TestController {
-
+	
+	public TestController() {
+	}
+	
 	/**************************测试*********************************/
 	@Autowired
 	private TbTechnicalCaseMapper tbTechnicalCaseMapper;
@@ -38,6 +41,9 @@ public class TestController {
 		List<TbTechnicalCase> list = tbTechnicalCaseMapper.selectByExample(example);
 		return WxResult.ok(list);
 	}
+	
+	
+	
 	
 	
 	

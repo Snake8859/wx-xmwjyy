@@ -1,0 +1,25 @@
+package com.xmwjyy.wxx.controller;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+
+import com.xmwjyy.wxx.service.socket.TCPServerThread;
+
+@Controller
+public class SocketController {
+
+	//Spring初始化Bean时，调用构造函数，并初始化服务端线程
+	public SocketController() {	
+		
+		//初始化socket数据保存的文件地址  -- 暂时硬编码
+		TCPServerThread.SOCKET_SAVEPATH = "/usr/local/socketTestFile";
+		
+		TCPServerThread  testThread = new TCPServerThread();
+		//设置为守护线程
+		testThread.setDaemon(true);
+		//启动线程
+		testThread.start();
+		System.out.println("Socket服务端线程开启");
+	}
+	
+}

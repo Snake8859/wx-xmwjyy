@@ -1,27 +1,19 @@
 package com.xmwjyy.wxx.controller;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.xmwjyy.wxx.common.utils.GetOpenIdutil;
+import com.xmwjyy.wxx.common.utils.JsonUtils;
+import com.xmwjyy.wxx.common.utils.WxResult;
+import com.xmwjyy.wxx.pojo.CustomResult;
+import com.xmwjyy.wxx.service.PageService;
 /**
  * 页面初始化管理Controller
  * @author Snake8859
  *
  */
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.xmwjyy.wxx.common.utils.GetOpenIdutil;
-import com.xmwjyy.wxx.common.utils.JsonUtils;
-import com.xmwjyy.wxx.common.utils.WxResult;
-import com.xmwjyy.wxx.pojo.CustomResult;
-import com.xmwjyy.wxx.pojo.TbUser;
-import com.xmwjyy.wxx.service.PageService;
 @Controller
 public class PageController {
 

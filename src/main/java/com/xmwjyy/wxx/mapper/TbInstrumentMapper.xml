@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmwjyy.wxx.mapper.TbInstrumentMapper" >
+  <resultMap id="BaseResultMap" type="com.xmwjyy.wxx.pojo.TbInstrument" >
+    <id column="iid" property="iid" jdbcType="VARCHAR" />
+    <result column="iname" property="iname" jdbcType="VARCHAR" />
+    <result column="sncode" property="sncode" jdbcType="VARCHAR" />
+    <result column="organization" property="organization" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    iid, iname, sncode, organization
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_instrument
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_instrument
+    where iid = #{iid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_instrument
+    where iid = #{iid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentExample" >
+    delete from tb_instrument
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xmwjyy.wxx.pojo.TbInstrument" >
+    insert into tb_instrument (iid, iname, sncode, 
+      organization)
+    values (#{iid,jdbcType=VARCHAR}, #{iname,jdbcType=VARCHAR}, #{sncode,jdbcType=VARCHAR}, 
+      #{organization,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmwjyy.wxx.pojo.TbInstrument" >
+    insert into tb_instrument
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="iname != null" >
+        iname,
+      </if>
+      <if test="sncode != null" >
+        sncode,
+      </if>
+      <if test="organization != null" >
+        organization,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null" >
+        #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="sncode != null" >
+        #{sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null" >
+        #{organization,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xmwjyy.wxx.pojo.TbInstrumentExample" resultType="java.lang.Integer" >
+    select count(*) from tb_instrument
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_instrument
+    <set >
+      <if test="record.iid != null" >
+        iid = #{record.iid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iname != null" >
+        iname = #{record.iname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sncode != null" >
+        sncode = #{record.sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organization != null" >
+        organization = #{record.organization,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_instrument
+    set iid = #{record.iid,jdbcType=VARCHAR},
+      iname = #{record.iname,jdbcType=VARCHAR},
+      sncode = #{record.sncode,jdbcType=VARCHAR},
+      organization = #{record.organization,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmwjyy.wxx.pojo.TbInstrument" >
+    update tb_instrument
+    <set >
+      <if test="iname != null" >
+        iname = #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="sncode != null" >
+        sncode = #{sncode,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null" >
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmwjyy.wxx.pojo.TbInstrument" >
+    update tb_instrument
+    set iname = #{iname,jdbcType=VARCHAR},
+      sncode = #{sncode,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR}
+    where iid = #{iid,jdbcType=VARCHAR}
+  </update>
+</mapper>
